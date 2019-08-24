@@ -1,19 +1,17 @@
-FROM python:3.6.9-alpine
-
+FROM python:3.7.4-alpine
 RUN apk --update-cache \
     add curl \
     tzdata \
-    gcc \
-    git \
-    libc-dev \
-    libxml2-dev \
-    fontconfig \
-    mesa-gl \
-    glu \
-    libxslt-dev && \
+    fontconfig && \
     cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
     apk del tzdata && \
     rm -rf /var/cache/apk/*
 
-RUN pip install emojilib --extra-index-url https://repo.fury.io/emoji-gen/
+WORKDIR /home
 
+COPY . /home
+RUN pip install pipenv && \
+    pipenv install
+
+EXPOSE 80
+CMD ["pipenv", "run", "python", "run.py"]
