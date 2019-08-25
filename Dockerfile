@@ -13,5 +13,5 @@ COPY . /home
 RUN pip install pipenv && \
     pipenv install
 
-EXPOSE 80
+EXPOSE 8080
 CMD ["pipenv", "run", "python", "run.py"]

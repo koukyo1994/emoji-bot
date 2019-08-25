@@ -1,4 +1,8 @@
+import sys
 import json
+
+sys.path.append("..")
+sys.path.append("./")
 
 with open("credentials.json", "r") as f:
     _json = json.load(f)
